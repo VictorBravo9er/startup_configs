@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cat << EOF
+#!/bin/bash
+
+case \$1 in
+pre)
+    # Commands to run before suspend
+    ;;
+post)
+    # Commands to run after resume
+    $1
+    ;;
+esac
+EOF

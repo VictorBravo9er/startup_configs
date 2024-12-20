@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cat << EOF
+#!/bin/bash
+
+sudo nvidia-smi -pm 1
+sudo nvidia-smi $1 $2
+EOF

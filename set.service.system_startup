@@ -1,0 +1,15 @@
+#!/bin/bash
+
+cat << EOF
+[Unit]
+Description=Run my script after bootup
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/bin/bash -c '$1'
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
+EOF

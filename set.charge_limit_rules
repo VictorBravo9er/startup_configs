@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cat << EOF
+SUBSYSTEM=="power_supply", ACTION=="change", RUN+="$1"
+EOF
