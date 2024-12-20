@@ -1,22 +1,22 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 [options...]
+    echo -e "Usage: $0 [options...]\n
     flags:
-        -f | --force
+        \e[1m-f | --force\e[0m
             force gpu to run at a static Clock
     options:
-        -c | --charge-limit <int val>
+        \e[1m-c | --charge-limit <int val>\e[0m
             set max battery charge limit
-        -l | --gpu-lower <int val>
+        \e[1m-l | --gpu-lower <int val>\e[0m
             set lower gpu clock limit
-        -u | --gpu-upper <int val>
+        \e[1m-u | --gpu-upper <int val>\e[0m
             set upper gpu clock limit
     "
 }
 
 error_message() {
-    echo "Error: $1" 1>&2
+    echo -e "\e[31mError:\e[0m \e[1m$1\e[0m" 1>&2
     usage
     exit 1
 }
@@ -33,7 +33,7 @@ while [[ "$#" -gt 0 ]]; do
             if ! [[ "$2" =~ ^[0-9]+$ ]]; then
                 error_message "-c | --charge-limit requires an integer argument"
             fi
-            echo "Charge limit is set to $2%."
+            echo -e "\e[32mCharge limit is set to $2%.\e[0m"
             charge_limit=$2
             shift 2
             ;;
@@ -41,7 +41,7 @@ while [[ "$#" -gt 0 ]]; do
             if ! [[ "$2" =~ ^[0-9]+$ ]]; then
                 error_message "-l | --gpu-lower requires an integer argument"
             fi
-            echo "Lower GPU clock is set to $2 MHz"
+            echo -e "\e[32mLower GPU clock is set to $2 MHz\e[0m"
             gpu_lower=$2
             shift 2
             ;;
@@ -49,7 +49,7 @@ while [[ "$#" -gt 0 ]]; do
             if ! [[ "$2" =~ ^[0-9]+$ ]]; then
                 error_message "-u | --gpu-upper requires an integer argument"
             fi
-            echo "Upper GPU clock is set to $2 MHz"
+            echo -e "\e[32mUpper GPU clock is set to $2 MHz\e[0m"
             gpu_upper=$2
             shift 2
             ;;
@@ -120,5 +120,5 @@ POWER_SWITCHING_RULES="/etc/udev/rules.d/99-power.rules"
 ./set.charge_limit_rules $SCRIPT_CHARGE | sudo tee $POWER_SWITCHING_RULES > /dev/null
 sudo udevadm control --reload-rules
 
-echo "All Set."
+echo -e "\e[32mAll Set.\e[0m"
 exit 0;
